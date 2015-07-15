@@ -1,0 +1,381 @@
+##########################################################
+##########################################################
+##########################################################
+# Data sources
+##########################################################
+##########################################################
+##########################################################
+
+#Run in testing mode: runs model at initial values and output some values to console (0=off, 1=on)
+0
+
+#first year / last year for the model simulation (should be same as catch)
+1950 2011
+
+#Retrospective NumYears
+0
+
+#Projection NumYears
+0
+
+
+#################################
+# Catchability Blocks for independent surveys
+#################################
+# Number of blocks
+1
+
+# Start years for blocks (first needs to be first year of model)
+1950 #1996
+
+# Flag for process to affect (1=M; 2=juvenile selectivity where adults=1.0; 3=FIM q)
+1
+
+
+
+#################################
+#Catch Data
+#################################
+
+#first / last year in any region of total catch time series
+1950 2011
+
+#Total Commercial Catch (in 1 millions of crabs)
+1.591627907	4.837209302	4.648372093	7.340232558	6.751860465	11.52302326	8.673255814	12.35255814	20.21906977	32.32232558	43.37790698	39.84790698	24.08488372	30.58697674	32.74767442	47.92837209	38.48372093	32.51767442	20.94906977	26.94	34.38744186	28.55511628	24.82162791	22.32209302	23.56697674	29.78627907	28.01976744	36.81906977	27.21142558	26.06416279	26.26187674	34.44252093	20.7541907	21.79802093	30.09286047	28.58157907	17.79924186	24.24336744	24.19252093	19.0636814	16.08111163	12.17434186	17.79914419	19.8218186	19.68356744	20.42054186	29.01142791	21.67715349	29.91344419	25.97550465	15.2852186	10.80618605	12.94655349	16.80319302	18.79805581	17.13954186	20.02360465	14.20889535	6.193246512	7.823753488	13.39225116	15.89117674
+
+#Commercial catch CV (same for each year since no data on variability):
+0.05
+
+#Flag to include effort time series in calcs (adds negLL component for F-deviations)
+0
+
+#Trap Effort  (if don't have an effort time series, set all equal to 1 for the total number of years)
+#From FL trip ticket program - # traps pulled
+1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1
+
+#Flag for calendar year (=0) or adjusted model year (=1), where adjusted model year is half-way through the year
+1
+
+
+#################################
+#Survey Data
+#################################
+
+###Adult surveys AND CVs###
+#Number of adult surveys 
+1
+
+#first / last year in adult surveys
+#Note: if catch are different lengths of time, use -999. for missing values
+#	Therefore, this is min and max year for any data
+1989 2011 
+
+#Standardized (x/mu)
+
+#Glf All Ad, 1990-present (otter trawls 1990-2011, 183m haul seines 1996-2011)
+2.801450204	1.09128937	0.793509531	2.132091602	0.640488149	0.994606188	0.597634102	1.452800261	0.460792438	1.916935486	0.788916559	0.413885163	0.277185746	0.390012294	0.671310537	1.141437488	1.0203978	2.297395155	0.738431001	0.186284873	0.235016851	1.173701304	0.7844279
+#Glf All Ad CV	
+0.374387019	0.40079575	0.406453272	0.339944414	0.445229963	0.50854749	0.334936697	0.144880941	0.166922492	0.116233374	0.121979485	0.15757089	0.171345178	0.152041413	0.127601251	0.10337698	0.106676832	0.094544103	0.114987264	0.207481909	0.177980827	0.110056199	0.118278162
+
+#Adult survey time(s) 
+0.0
+
+
+
+###recruitment surveys AND CVs###
+
+#Number of recrtui surveys
+1
+
+#first /last year in recruit surveys 
+#Note: if catch are different lengths of time, use -999. for missing values
+#	Therefore, this is min and max year for any data
+1989 2011 
+
+#Standardized (x/mu)
+#Do all surveys as rows first, then all CVs as rows 2nd
+#GlfAll Rec	
+1.001005116	0.283812494	1.143517535	0.928502926	0.792187488	0.639873842	0.83191239	0.706005627	0.965528699	2.013047475	1.304789755	1.075983431	0.765711243	0.643204199	1.776157051	1.114431304	0.853290469	1.596605041	0.829762155	0.569516693	0.727422957	1.666886277	0.770845833
+#GlfAll Rec CV	
+0.366562411	0.440732341	0.288289062	0.297553426	0.277851454	0.242664878	0.130397553	0.115172137	0.11952129	0.109251156	0.113825168	0.107998652	0.112934582	0.113641943	0.091612603	0.093220916	0.09356952	0.091690735	0.101344351	0.106715434	0.1061701	0.098185682	0.149213969
+
+#Recruit survey time
+#NOTE: assummed that recruits are surveyed before vulnerable to fishery
+#E.g., re_survey_est(r,i)=qr(r,i)*(R(r)*mfexp(-(sr_time(r,i)*Mt(1)));
+0.5
+
+
+
+#################################
+#Fishery params
+#################################
+#Proportion of recreational harvest per region
+.05
+
+#Proportion under reporting per region
+#could alternative add this directly to the catch data for month and region specific 
+0
+
+
+#Max F
+4
+
+#Max M
+4
+
+
+#Ave Z prior
+# calculated as sum of size freq across all years for 183m haul seine and 6.1m otter trawl,
+#   using eq 4.4.5.3 in Sparre and venema 1998
+# von Bert parameters based on fit to simulated data from IBM molt-process temperature
+#   for both sexes combined
+
+#Start and end years for which computed
+1989 2011
+
+#Z est
+3.10599543
+
+#+/- 20%
+#2.174196801
+#4.037794059
+
+
+#Ave Z CV
+.05
+
+#If start early in time series, set an initial prior for F since know is low
+#F0 Prior
+.01
+
+#F0 CV
+.2
+#################################
+#Life History params
+#################################
+
+#Sex ratio (leave at 1)
+.5
+
+#Natural mortality per stage 
+#3yr mortality 
+1.28 .87
+#2yr mortality
+#1.78 1.22
+#3yr constant
+#1 1
+
+#Stages for which M is variable in block or environment (0=off, 1=0n) 
+1 1
+
+
+#Proportion spawning per stage (1st = Recruits, 2nd = Adults)
+1
+1
+
+#Proportion of the time step before spawning occurs (0=start of year, 1=end of year)
+1
+
+#SR formulation (Bev Holt=1, Ricker=2)
+2
+
+
+#################################
+#Environmental time series params/data
+#################################
+
+#Number of environmental time series
+1
+
+#first / last year for the environmental time series
+1950 2011
+
+#NAO Year: -0.158333333	-0.07	-0.495	-0.090833333	-0.085833333	-0.5	-0.173333333	-0.2425	-0.703333333	0.286666667	-0.56	0.01	-0.380833333	-0.555	-0.178333333	-0.215833333	-0.49	0.341666667	-1.039166667	-0.188333333	-0.3525	-0.0425	0.4875	-0.159166667	0.111666667	-0.164166667	0.184166667	-0.415	0.275	0.053333333	-0.546666667	-0.266666667	0.363333333	0.298333333	0.228333333	-0.28	0.429166667	-0.2225	-0.079166667	0.6775	0.606666667	0.250833333	0.5375	0.155	0.541666667	-0.093333333	-0.249166667	-0.204166667	-0.5425	0.330833333	0.159166667	-0.241666667	0.001666667	0.028333333	0.156666667	-0.314166667	-0.3125	0.105833333	-0.4525	-0.323333333	-1.286666667	0.204166667
+#AdjYear:	-0.488333333	0.000833333	-0.475	0.165	-0.7	-0.061666667	-0.200833333	-0.590833333	-0.215833333	0.015833333	-0.318333333	-0.033333333	-0.6975	-0.38	-0.275833333	-0.1825	-0.155	-0.059166667	-0.895	-0.120833333	-0.559166667	0.48	0.300833333	-0.088333333	-0.330833333	0.440833333	-0.383333333	-0.130833333	0.035	0.1575	-0.391666667	-0.343333333	0.599166667	0.286666667	-0.209166667	0.2575	0.0875	0.015	0.320833333	0.528333333	0.310833333	0.676666667	0.2225	0.358333333	0.225833333	-0.309166667	-0.155833333	-0.495833333	-0.0525	0.531666667	-0.305833333	0.149166667	-0.245833333	0.04	-0.081666667	-0.111666667	-0.31	-0.138333333	-0.203333333	-1.009166667	-0.518333333	0.081666667
+
+#Precipitation AdjYear:
+-0.621585943	-0.254594572	-0.06121835	0.936715878	-1.443082012	-1.61387415	-0.130382108	1.718689799	1.021406195	1.25571607	0.523144833	-1.594113076	-0.32093532	0.232374747	0.774392772	0.911308783	-1.056329567	-0.606059385	0.01359143	1.769503989	-1.474135128	0.497737738	-0.27012113	-0.5566567	-0.433855742	0.228140231	-1.412028896	0.569724507	-0.100740497	0.734870624	-1.743732635	0.753220193	1.440623261	0.290246463	-1.540475876	0.520321823	0.597954613	-0.707687765	-0.217895435	-0.776851523	0.981884047	0.020648956	-0.052749318	-0.018873191	1.398278103	1.324879828	-0.133205119	0.993176089	0.146272925	-1.379564275	-0.929294093	0.391874843	1.700340231	-0.456439826	2.185898045	-1.067621609	-1.723971561	-0.330815857	0.446923549	0.35094119	-1.862299078	0.160387978
+
+#Environment series CV 
+.1
+
+#Time series which influences recruitment:
+#Use 3, assumming the num of eggs are survival of early recruits are due to rain 6 months around spawn peak
+1
+
+#Lag in environment influence on recruitment (# time steps)
+0
+
+#Time series that influences mortality (one for each stage):
+1 1
+
+#Lag in enviro influence on mortality (one for each stage):
+0 0
+
+#Flag for environment-recruitment link (0=off, 1=fit via data method, 2=fit via model method as per Schrippa)
+0
+
+#Flag for environment-M link (0=off, 1=fit via data method, 2=fit via model method as per Schrippa)
+1
+
+
+#################################
+#Projections time series
+#################################
+
+#Environmental time series annomolies for projection years +1 (+1 is for recruit calc) 
+#Note: must be same number of series as in environment section above with mean=0 (average)
+#0 0 0 0 0 0 0 0 0 0 0
+0
+#Effort Deviation from year before terminal yr (0) to FMSY (1)
+#E.g., 0 .25 .5 .75 1 would be step increase from year before terminal yr F -> FMSY
+#.25 .5 .75 1 1 1 1 1 1 1 1
+0
+
+
+##########################################################
+##########################################################
+##########################################################
+#Parameters and flags
+# Format: 
+#	1st row: initial parameter estimates vector by sub-stock (or stage, e.g., selectivity)
+#  2nd row: min bound, max bound, phase of estimatation
+# note: if phase <0, then initial value will be held constant
+##########################################################
+##########################################################
+##########################################################
+
+#################################
+#Initial values, bounds, and phase
+#################################
+
+#init_N (first row is vector of initial parameter guesses by sub-stock)
+50
+.1 250 1
+
+#init_R 
+#Note: only used if the SR lag (in years) is >0
+100
+.1 200 1
+
+################
+# F params
+################
+## F=(q*Effort)*exp(Fdev)  where 1st Fdev=0 so q scales to the initial year F
+#F q 
+1
+.00001 10 2
+
+#F_dev
+1 
+.1 5 5
+
+#effort_cv
+.2
+.01 1 -1
+
+################
+# M params
+################
+#M_dev
+1 
+.1 5 3
+
+
+#M_cv 
+.2
+.01 1 -1
+
+################
+# Recruit params
+################
+
+#rec_dev (expected: log(rec_dev)=0 / rec_dev=1)
+1 
+.1  5 4
+
+#rec_cv 
+.5
+.3 1 -1
+
+#Stock Recruitment S0
+5 
+.1 10000 3
+
+#S-R steepness
+.8
+.3 .9999 3
+
+
+########
+# Environment params
+########
+#sr_beta_env (environmental link parameter for recruitment: R=R*exp(sr_beta_env*env) )
+0
+-20 20 3
+
+#M_beta_env (environmental link parameter for yearly M: Mt=M*exp(M_beta_env*env) )
+#note: one for each stage
+0 0
+-20 20 3
+
+
+#sel (vulnerability)
+#NOTE: currently the modle only accomodates surveying the recruits prior to being vulnerable
+# if this is not the case (i.e., sel > (1-sr_time)), need to re-code the index calcs
+0.3 1.0
+0.1 1 -1
+
+
+#################################
+#Likelihood weights
+#################################
+
+#Landings weight(s) lambda
+1.0
+#Adult survey weight(s) lambda
+1.0
+#Recruit survey weight(s) lambda 
+1.0
+#recruitment deviation weight(s) lambda 
+1.0
+#effort residuals weight(s) lambda 
+1.0
+#Z prior weight(s) lambda 
+1.0
+#F0 prior weight(s) lambda 
+1.0
+
+
+
+#################################
+#Additional param control flags not addressed in data section
+#################################
+
+#Bias correction adjustment for predicted recruitment: biasAdj*(0.5*var)
+#can turn off by setting=0 or turn on to whatever proportion by setting =1
+1
+
+
+#################################
+#Reference point calcs 
+#################################
+
+#variables to control F for females used in reference point calculations
+#FSPR_init FSPR_max FSPR_inc
+0 6.0 0.01
+
+#SPR targets for calculating F reference points
+#number of SPR targets
+5
+
+#targets
+0.05 0.1 0.2 0.3 0.4 
+
+
+#################################
+#EOF I/O test
+#################################
+#EOF number
+12345
+

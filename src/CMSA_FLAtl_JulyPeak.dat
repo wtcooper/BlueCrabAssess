@@ -1,0 +1,343 @@
+##########################################################
+##########################################################
+##########################################################
+# Data sources
+##########################################################
+##########################################################
+##########################################################
+
+#Run in testing mode: runs model at initial values and output some values to console (0=off, 1=on)
+0
+
+#first year / last year for the model simulation (should be same as catch)
+1996 2011
+
+#Retrospective NumYears
+0
+
+#Projection NumYears
+0
+
+
+
+#################################
+#Catch Data
+#################################
+
+#first / last year in any region of total catch time series
+1986 2011
+
+#Total Commercial Catch (in 1 millions of crabs)
+#rows=spatial regions, columns=time steps (steps/year * years)
+#FWC
+14.0008	14.138159	11.018607	13.994219	13.624331	13.762694	11.848559	11.93994	9.1993	10.965712	14.085322	12.587896	9.508322	12.994882	7.94241	6.170188	5.030489	6.379921	10.379682	8.417039	8.367414	10.179176	5.371807	5.369127	7.278609	9.341744
+
+#Commercial catch CV (same for each year since no data on variability):
+0.05
+
+#Flag to include effort time series in calcs (adds negLL component for F-deviations)
+1
+
+#Trap Effort  (if don't have an effort time series, set all equal to 1 for the total number of years)
+2.736394	3.157956	4.106165	3.980525	4.043423	2.745022	2.82766	3.023035	2.828066	2.87825	3.60881	3.618171	2.770491	3.093512	2.539213	2.226232	1.96857	1.954901	2.353451	2.490104	2.747297	3.046645	2.185358	1.901209	2.296316	2.647545
+
+
+
+#################################
+#Survey Data
+#################################
+
+###Adult surveys AND CVs###
+#Number of adult surveys 
+1
+
+#first / last year in adult surveys
+#Note: if catch are different lengths of time, use -999. for missing values
+#	Therefore, this is min and max year for any data
+1997 2011 
+
+#Standardized (x/mu)
+#Do all surveys as rows first, then all CVs as rows 2nd
+#Atl All Ad	
+1.048884154	1.610165921	0.54360511	1.425947662	0.602992547	0.40641307	0.357164394	1.355042505	1.431686249	1.422176616	1.253121761	1.054752761	0.652986391	0.804790066	1.030270793
+#Atl All Ad CV	
+0.204619473	0.187438494	0.263632049	0.195613905	0.154816164	0.164243592	0.166510841	0.112759525	0.1126652	0.112932312	0.117213873	0.120786966	0.138062358	0.133595821	0.124863294
+
+#Adult survey time(s) 
+0.0
+
+
+
+###recruitment surveys AND CVs###
+
+#Number of recrtui surveys
+1
+
+#first /last year in recruit surveys 
+#Note: if catch are different lengths of time, use -999. for missing values
+#	Therefore, this is min and max year for any data
+1996 2011 
+
+#Standardized (x/mu)
+#Do all surveys as rows first, then all CVs as rows 2nd
+#GlfAll Rec	
+1.695469487	3.011190866	1.117511707	1.405588292	1.195582001	0.438951546	0.218725223	1.235948236	0.551469654	0.790682444	0.835988777	0.759186553	0.418714587	0.348578832	0.964685229	1.011726566
+#GlfAll Rec CV	
+0.859825976	0.349014207	0.356257342	0.373308808	0.334913499	0.205592577	0.225244706	0.165238991	0.168158183	0.147991236	0.139430155	0.137917902	0.1709805	0.168180614	0.143944489	0.21323594
+
+#Recruit survey time
+#NOTE: assummed that recruits are surveyed before vulnerable to fishery and after they "recruit" to the habitat
+#I.e., fishing mortality is not evenly distributed over the year but after survey occurs
+#E.g., re_survey_est(r,i)=qr(r,i)*(R(r)*mfexp(-(sr_time(r,i)-rec_time)*Mt(1)));
+0.5
+
+
+
+#################################
+#Fishery params
+#################################
+#Proportion of recreational harvest per region
+.05
+
+#Proportion under reporting per region
+#could alternative add this directly to the catch data for month and region specific 
+0
+
+
+#Max F
+4
+
+#Max M
+4
+
+#Ave Z prior
+# calculated as sum of size freq across all years for 183m haul seine and 6.1m otter trawl,
+#   using eq 4.4.5.3 in Sparre and venema 1998
+# von Bert parameters based on fit to simulated data from IBM molt-process temperature
+#   for both sexes combined
+2.460680847
+
+
+#+/- 20%
+#1.722476593
+#3.198885101
+
+
+#Ave Z CV
+.05
+
+
+#################################
+#Life History params
+#################################
+
+#Sex ratio (leave at 1)
+.5
+
+#Natural mortality per stage 
+#3yr mortality 
+1.29 0.86
+
+#2yr mortality
+#1.80 1.20
+
+#3yr constant
+#1 1
+
+#Proportion spawning per stage (1st = Recruits, 2nd = Adults)
+1
+1
+
+
+#Proportion of the time step before spawning occurs (0=start of year, 1=end of year)
+1
+
+#SR formulation (Bev Holt=1, Ricker=2)
+2
+
+
+#################################
+#Environmental time series params/data
+#################################
+
+#Number of environmental time series
+1
+
+#first / last year for the environmental time series
+1980 2011
+
+#GlfStream	-0.982937731	-0.858425202	1.539823242	0.916872095	-0.625035665	0.179729529	0.603164622	-0.126476777	-0.255735071	0.374830432	-0.279651943	0.094259549	0.714082581	-0.603017897	1.486887988	1.209786676	-0.394459622	2.378390258	-0.262426043	-1.043837322	-1.47568612	-0.884639379	0.532935588	0.900764451	1.256223547	0.468701733	-1.223624997	-1.287573367	-0.551710175	0.794235242	-1.015937809	-1.579512414
+#AtlStream	
+-1.371195991	-0.934229209	2.01234639	1.041339067	-0.036041279	0.306438513	-0.024093324	-0.441231402	-0.770842701	-1.189193943	-0.538279926	0.088980559	0.67933287	-0.709307014	1.752663352	1.075693309	-0.201937715	2.291092663	-0.5932093	0.204586106	-1.388224535	0.105886731	0.659193015	-0.522463434	0.849843471	1.2054167	-1.054161503	-1.176871965	0.228422422	0.456717828	-1.158008571	-0.848661184
+#FLPrecip	-1.676902843	0.69198606	1.344133542	0.252757366	-1.484070733	0.471032601	0.544683754	-0.693994728	-0.229322908	-0.75961121	0.908922184	-0.003013002	-0.072646819	-0.040508134	1.303960186	1.234326369	-0.148976196	0.919635079	0.116167955	-1.33141198	-0.904235292	0.349173421	1.590530127	-0.455632815	2.051184611	-1.035468256	-1.658155277	-0.336451858	0.401398784	0.310339177	-1.78938824	0.129559074
+
+#Environment series CV 
+.1
+
+
+#Time series which influences recruitment:
+#Use 3, assumming the num of eggs are survival of early recruits are due to rain 6 months around spawn peak
+1
+
+#Lag in environment influence on recruitment (# time steps)
+1
+
+#Time series that influences mortality:
+1 1
+
+#Lag in enviro influence on mortality
+0 0
+
+
+#################################
+#Projections time series
+#################################
+
+#Environmental time series annomolies for projection years +1 (+1 is for recruit calc) 
+#Note: must be same number of series as in environment section above with mean=0 (average)
+#0 0 0 0 0 0 0 0 0 0 0
+0
+#Effort Deviation from year before terminal yr (0) to FMSY (1)
+#E.g., 0 .25 .5 .75 1 would be step increase from year before terminal yr F -> FMSY
+#.25 .5 .75 1 1 1 1 1 1 1 1
+0
+
+
+##########################################################
+##########################################################
+##########################################################
+#Parameters and flags
+# Format: 
+#	1st row: initial parameter estimates vector by sub-stock (or stage, e.g., selectivity)
+#  2nd row: min bound, max bound, phase of estimatation
+# note: if phase <0, then initial value will be held constant
+#Note: in lognormal dist: cv=sqrt(e^var-1); var=log(cv^2+1); std=sqrt(log(cv^2+1))
+#Note: all parameters should be normal number (NOT in log space)
+##########################################################
+##########################################################
+##########################################################
+
+#################################
+#Initial values, bounds, and phase
+#################################
+
+#init_N (first row is vector of initial parameter guesses by sub-stock)
+5
+.01 100 1
+
+#init_R 
+#Note: only used if the SR lag (in years) is >0
+50
+.01 500 1
+
+################
+# F params
+################
+## F=(q*Effort)*exp(Fdev)  where 1st Fdev=0 so q scales to the initial year F
+#F q 
+1
+.00001 10 2
+
+
+#F_dev
+1 
+.1 5 5
+
+#effort_cv
+.2
+.01 1 -1
+
+
+################
+# Recruit params
+################
+
+#rec_dev (expected: log(rec_dev)=0 / rec_dev=1)
+1 
+.1  5 4
+
+#rec_cv (note: estimating always sets to lower bound so set single value)
+.5
+.3 1 -1
+
+#Stock Recruitment S0
+5 
+.1 10000 3
+
+#S-R steepness
+.8 
+.2 .9999 3
+
+
+########
+# Environment params
+########
+#sr_beta_env (environmental link parameter for recruitment: R=R*exp(sr_beta_env*env) )
+0
+-20 20 -3
+
+#M_beta_env (environmental link parameter for yearly M: Mt=M*exp(M_beta_env*env) )
+#note: one for each stage
+0 0
+-20 20 3
+
+#M_cv 
+.1
+.01 1 -1
+
+#sel (vulnerability)
+#NOTE: currently the modle only accomodates surveying the recruits prior to being vulnerable
+# if this is not the case (i.e., sel > (1-sr_time)), need to re-code the index calcs
+0.3 1.0
+0.1 1 -1
+
+
+#################################
+#Likelihood weights
+#################################
+
+#Landings weight(s) lambda
+1.0
+#Adult survey weight(s) lambda
+1.0
+#Recruit survey weight(s) lambda 
+1.0
+#recruitment deviation weight(s) lambda 
+1.0
+#effort residuals weight(s) lambda 
+1.0
+#Z prior weight(s) lambda 
+1.0
+
+
+#################################
+#Additional param control flags not addressed in data section
+#################################
+
+#Bias correction adjustment for predicted recruitment: biasAdj*(0.5*var)
+#can turn off by setting=0 or turn on to whatever proportion by setting =1
+1
+
+
+#################################
+#Reference point calcs 
+#################################
+
+#variables to control F for females used in reference point calculations
+#FSPR_init FSPR_max FSPR_inc
+0 6.0 0.01
+
+#SPR targets for calculating F reference points
+#number of SPR targets
+5
+
+#targets
+0.05 0.1 0.2 0.3 0.4 
+
+
+#################################
+#EOF I/O test
+#################################
+#EOF number
+12345
+

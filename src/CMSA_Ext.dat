@@ -1,0 +1,17 @@
+
+## Florida Assessment data files:
+#CMSA_FLAtl_JulyPeak.dat
+#CMSA_FLGulf_JulyPeak.dat
+
+
+## GDAR Assessment data files:
+#
+CMSA_EastStock.dat
+#CMSA_WestStock.dat
+
+##Long time series (1950-present)
+# CMSA_EastStock_LongCalendar.dat
+#CMSA_WestStock_LongCalendar.dat
+ 
+## For testing simulation (needs updated):
+#CMSA_Sim.dat
